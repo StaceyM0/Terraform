@@ -21,3 +21,7 @@ resource "aws_instance" "Mywebsite" {
   }
 }
 
+
+
+
+
