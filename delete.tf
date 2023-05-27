@@ -91,5 +91,3 @@ resource "aws_s3_bucket_acl" "private_jenkins_bucket" {
 resource "random_id" "randomness" {
   byte_length = 4
 }
-
-
