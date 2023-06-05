@@ -21,7 +21,4 @@ variable "ami_id" {
     default = "ami-0715c1897453cabd1"
 }
 
-variable "instance" {
-    type = string 
-    default = "t2.micro"
-}
+
