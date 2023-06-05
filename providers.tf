@@ -11,3 +11,5 @@ variable "ami_id" {
     default = "ami-0715c1897453cabd1"
 }
 
+
+
