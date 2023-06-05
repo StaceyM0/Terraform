@@ -17,9 +17,4 @@ variable "instance" {
 }
 
 
-variable "ami_id" {
-    type = string
-    default = "ami-0715c1897453cabd1"
-}
-
 
