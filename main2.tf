@@ -305,28 +305,3 @@ resource "aws_instance" "web_server" {
     Owner = local.team
     App   = local.application
   }
-
-  lifecycle {
-    ignore_changes = [security_groups]
-  }
-}
-
-# Terraform Resource Block - To Build EC2 instance in Public Subnet
-resource "aws_instance" "web_server_2" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = "t2.micro"
-  subnet_id     = aws_subnet.public_subnets["public_subnet_2"].id
-  tags = {
-    Name = "Web EC2 Server 2"
-  }
-}
-
-module "server" {
-  source          = "./modules/server"
-  ami             = data.aws_ami.ubuntu.id
-  size            = "t2.micro"
-  subnet_id       = aws_subnet.public_subnets["public_subnet_3"].id
-  security_groups = [aws_security_group.vpc-ping.id, aws_security_group.ingress-ssh.id, aws_security_group.vpc-web.id]
-}
-
-module "server_subnet_1
