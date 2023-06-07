@@ -55,17 +55,3 @@ resource "aws_subnet" "public_subnets" {
 
  {
     command = "chmod 600 ${local_file.private_key_pem.filename}"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "sudo rm -rf /tmp",
-      "sudo git clone https://github.com/hashicorp/demo-terraform-101 /tmp",
-      "sudo sh /tmp/assets/setup-web.sh",
-    ]
-  }
-  tags = {
-    Name  = local.server_name
-    Owner = local.team
-    App   = local.application
-  }
