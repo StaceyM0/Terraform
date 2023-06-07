@@ -358,5 +358,3 @@ output "public_dns_server_subnet_1" {
   value = module.server_subnet_1.public_dns
 }
 
-
-
