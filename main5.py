@@ -112,16 +112,3 @@ resource "aws_internet_gateway" "internet_gateway" {
 }
 
 #Create EIP for NAT Gateway
-resource "aws_eip" "nat_gateway_eip" {
-  domain        = "vpc"
-  depends_on = [aws_internet_gateway.internet_gateway]
-  tags = {
-    Name = "demo_igw_eip"
-  }
-}
-
-#Create NAT Gateway
-resource "aws_nat_gateway" "nat_gateway" {
-  depends_on    = [aws_subnet.public_subnets]
-  allocation_id = aws_eip.nat_gateway_eip.id
-  s

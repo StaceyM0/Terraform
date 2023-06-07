@@ -1,18 +1,4 @@
-
-
-
-    Name        = var.vpc_name
-    Environment = "demo_environment"
-    Terraform   = "true"
-ty_zone = tolist(data.aws_availability_zones.available.names)[each.value]
-
-  tags = {
-    Name      = each.key
-    Terraform = "true"
-  }
-}
-
-#Deploy the public subnets
+ubnets
 resource "aws_subnet" "public_subnets" {
   for_each                = var.public_subnets
   vpc_id                  = aws_vpc.vpc.id
