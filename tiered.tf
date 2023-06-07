@@ -143,8 +143,6 @@ resource "aws_instance" "web_server" {
   }
 }
 
-
-
 }
 variable "num_1" {
 type = number
