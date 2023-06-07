@@ -218,50 +218,7 @@ resource "tls_private_key" "generated" {
 resource "local_file" "private_key_pem" {
   content  = tls_private_key.generated.private_key_pem
   filename = "MyAWSKey.pem"
-}
-
-resource "aws_key_pair" "generated" {
-  key_name   = "MyAWSKey"
-  public_key = tls_private_key.generated.public_key_openssh
-}
-
-resource "aws_security_group" "ingress-ssh" {
-  name   = "allow-all-ssh"
-  vpc_id = aws_vpc.vpc.id
-  ingress {
-    cidr_blocks = [
-      "0.0.0.0/0"
-    ]
-    from_port = 22
-    to_port   = 22
-    protocol  = "tcp"
-  }
-  // Terraform removes the default rule
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
-resource "aws_security_group" "vpc-web" {
-  name        = "vpc-web-${terraform.workspace}"
-  vpc_id      = aws_vpc.vpc.id
-  description = "Web Traffic"
-  ingress {
-    description = "Allow Port 80"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    description = "Allow Port 443"
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
+"tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -305,28 +262,3 @@ resource "aws_instance" "web_server" {
     Owner = local.team
     App   = local.application
   }
-
-  lifecycle {
-    ignore_changes = [security_groups]
-  }
-}
-
-# Terraform Resource Block - To Build EC2 instance in Public Subnet
-resource "aws_instance" "web_server_2" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = "t2.micro"
-  subnet_id     = aws_subnet.public_subnets["public_subnet_2"].id
-  tags = {
-    Name = "Web EC2 Server 2"
-  }
-}
-
-module "server" {
-  source          = "./modules/server"
-  ami             = data.aws_ami.ubuntu.id
-  size            = "t2.micro"
-  subnet_id       = aws_subnet.public_subnets["public_subnet_3"].id
-  security_groups = [aws_security_group.vpc-ping.id, aws_security_group.ingress-ssh.id, aws_security_group.vpc-web.id]
-}
-
-module "server_subnet_1

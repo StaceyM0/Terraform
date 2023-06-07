@@ -124,40 +124,4 @@ resource "aws_eip" "nat_gateway_eip" {
 resource "aws_nat_gateway" "nat_gateway" {
   depends_on    = [aws_subnet.public_subnets]
   allocation_id = aws_eip.nat_gateway_eip.id
-  subnet_id     = aws_subnet.public_subnets["public_subnet_1"].id
-  tags = {
-    Name = "demo_nat_gateway"
-  }
-}
-
-
-resource "random_string" "random" {
-  length = 10
-}
-
-# Terraform Data Block - To Lookup Latest Ubuntu 20.04 AMI Image
-data "aws_ami" "ubuntu" {
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  owners = ["099720109477"]
-}
-
-
-
-output "public_ip_server_subnet_1" {
-  value = module.server_subnet_1.public_ip
-}
-
-output "public_dns_server_subnet_1" {
-  value = module.server_subnet_1.public_dns
-}
+  s
