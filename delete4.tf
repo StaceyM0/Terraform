@@ -85,12 +85,7 @@ resource "aws_route_table" "private_route_table" {
     Name      = "demo_private_rtb"
     Terraform = "true"
   }
-}
-
-
-
-
-
+} 
 
 #Create route table associations
 resource "aws_route_table_association" "public" {

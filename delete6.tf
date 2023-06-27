@@ -7,7 +7,6 @@ Description: AWS Infrastructure Buildout
 provider "aws" {
   region = "us-east-1"
 }
-
   tags = {
     Name        = var.vpc_name
     Environment = "demo_environment"

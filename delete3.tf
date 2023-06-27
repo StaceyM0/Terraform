@@ -87,11 +87,6 @@ resource "aws_route_table" "private_route_table" {
   }
 }
 
-
-
-
-
-
 #Create route table associations
 resource "aws_route_table_association" "public" {
   depends_on     = [aws_subnet.public_subnets]
