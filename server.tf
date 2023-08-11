@@ -1,6 +1,3 @@
-
-
-
 variable "ami" {}
 variable "size" {
   default = "t2.micro"
