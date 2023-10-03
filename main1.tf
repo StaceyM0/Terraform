@@ -1,7 +1,3 @@
-
-
-
-
 /*
 Name: IaC Buildout for Terraform Associate Exam
 Description: AWS Infrastructure Buildout
